@@ -2,23 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Barang extends Model
 {
-    use HasFactory;
+    protected $table = 'barangs';
+    protected $fillable = ['nama_barang','jumlah','keterangan','owner_id'];
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<string>
-     */
-    protected $fillable = [
-        'kode_barang',   
-        'nama_barang',
-        'jumlah',
-        'satuan',
-        'lokasi',
-    ];
+    public function owner()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'owner_id');
+    }
 }
